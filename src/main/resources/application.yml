@@ -29,3 +29,5 @@ springdoc:
 app:
   zone-id: UTC
   default-limit-usd: 1000.00
+  demo-data:
+    enabled: ${DEMO_DATA_ENABLED:true}

@@ -1,5 +1,6 @@
 package com.example.expenselimit.error;
 
+import jakarta.validation.ConstraintViolationException;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
@@ -32,6 +33,14 @@ public class ApiExceptionHandler {
 
     @ExceptionHandler(HandlerMethodValidationException.class)
     ProblemDetail handleHandlerValidation(HandlerMethodValidationException ex) {
+        ProblemDetail detail = ProblemDetail.forStatus(HttpStatus.BAD_REQUEST);
+        detail.setTitle("Validation failed");
+        detail.setDetail(ex.getMessage());
+        return detail;
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    ProblemDetail handleConstraintViolation(ConstraintViolationException ex) {
         ProblemDetail detail = ProblemDetail.forStatus(HttpStatus.BAD_REQUEST);
         detail.setTitle("Validation failed");
         detail.setDetail(ex.getMessage());
