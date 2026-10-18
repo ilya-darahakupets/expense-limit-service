@@ -27,5 +27,7 @@ public interface ExpenseTransactionRepository extends JpaRepository<ExpenseTrans
             @Param("status") ProcessingStatus status,
             @Param("excludeId") Long excludeId);
 
+    boolean existsByAccountFrom(String accountFrom);
+
     List<ExpenseTransaction> findByAccountFromAndLimitExceededIsTrueOrderByOccurredAtAscIdAsc(String accountFrom);
 }
